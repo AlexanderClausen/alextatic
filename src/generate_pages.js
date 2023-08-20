@@ -57,25 +57,9 @@ async function convertAllMarkdownToHtml() {
     return pagesData;
 }
 
-async function deleteUnsyncedHtmlFiles() {
-    const generatedHtmlFiles = (await fs.readdir('./public/page'))
-        .filter(file => path.extname(file) === '.html');
-
-    for (const htmlFile of generatedHtmlFiles) {
-        const basename = path.basename(htmlFile, '.html');
-        const correspondingMdFile = path.join('./content/pages', basename + '.md');
-
-        if (!await fs.pathExists(correspondingMdFile)) {
-            await fs.unlink(path.join('./public/page', htmlFile));
-            console.log(`🗑️ Deleted: ${htmlFile} (as no corresponding MD file exists)`);
-        }
-    }
-}
-
 exports.run = async function() {
     try {
         const pagesData = await convertAllMarkdownToHtml();
-        await deleteUnsyncedHtmlFiles();
         return pagesData;
     } catch (error) {
         console.error('❌ ' + error);

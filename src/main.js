@@ -1,11 +1,24 @@
+const fs = require('fs-extra');
+
 const generatePosts = require('./generate_posts');
 const generatePages = require('./generate_pages');
 const generateIndex = require('./generate_index');
-const { generateNavHtml } = require('./generate_topnav.js');
+const { generateNavHtml, checkInternalLinksExistence } = require('./generate_topnav.js');
 const context = require('./context');
 const { ensureSampleMarkdownFiles } = require('./sample_creator.js');
+const copyAndProcessAssets = require('./copy_assets');
 
 (async function main() {
+    try {
+        // Remove the existing "public" directory
+        await fs.remove('./public');
+        console.log('🗑️  Cleaned up old build');
+    
+        // ... rest of your code
+    } catch (error) {
+        console.error('❌ An error occurred during the generation process:', error);
+    }
+    
     try {
         // Ensure sample markdown files are created if none exist
         await ensureSampleMarkdownFiles();
@@ -23,7 +36,7 @@ const { ensureSampleMarkdownFiles } = require('./sample_creator.js');
             return;
         }
         
-        const pagesData = await generatePages.run();  // Added this line
+        const pagesData = await generatePages.run();
 
         // Check the validity of the pagesData before proceeding
         if (!pagesData || !Array.isArray(pagesData) || pagesData.length === 0) {
@@ -32,6 +45,14 @@ const { ensureSampleMarkdownFiles } = require('./sample_creator.js');
         }
 
         await generateIndex.run(postsData, navHtml);
+        
+        // Copy and process (minify) assets
+        await copyAndProcessAssets();
+
+        // Check the existence of internal links
+        await checkInternalLinksExistence();
+
+
     } catch (error) {
         console.error('❌ An error occurred during the generation process:', error);
     }

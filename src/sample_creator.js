@@ -13,6 +13,7 @@ title: "Meaningful Title"
 author: "John Doe"
 date: "${date}"
 tags: ["tag1", "tag2"]
+excerpt: "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
 ---
 
 # Heading

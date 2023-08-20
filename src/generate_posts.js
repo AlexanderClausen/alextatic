@@ -57,25 +57,9 @@ async function convertAllMarkdownToHtml() {
     return postsData;
 }
 
-async function deleteUnsyncedHtmlFiles() {
-    const generatedHtmlFiles = (await fs.readdir('./public/post'))
-        .filter(file => path.extname(file) === '.html');
-
-    for (const htmlFile of generatedHtmlFiles) {
-        const [_, date, basename] = htmlFile.match(/^(\d{4}-\d{2}-\d{2})-(.+)\.html$/) || [];
-        const correspondingMdFile = path.join('./content/posts', basename + '.md');
-
-        if (!await fs.pathExists(correspondingMdFile)) {
-            await fs.unlink(path.join('./public/post', htmlFile));
-            console.log(`🗑️ Deleted: ${htmlFile} (as no corresponding MD file exists)`);
-        }
-    }
-}
-
 exports.run = async function() {
     try {
         const postsData = await convertAllMarkdownToHtml();
-        await deleteUnsyncedHtmlFiles();
         return postsData;
     } catch (error) {
         console.error('❌ ' + error);

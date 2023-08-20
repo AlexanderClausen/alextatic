@@ -1,5 +1,6 @@
 {
     "locale": "en-US",
-    "dateFormat": "long"
+    "dateFormat": "long",
+    "theme": "default"
  }
  

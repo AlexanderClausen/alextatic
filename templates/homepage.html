@@ -1,6 +1,6 @@
 <h1>{{title}}</h1>
 {{#each posts}}
-    <a href="{{this.filename}}"><h2>{{this.title}}</h2></a>
-    <p>{{formatDate this.date}}</p>
-    <p>{{this.excerpt}}</p>
+    <h2 class="home-articletitle"><a href="{{this.filename}}">{{this.title}}</a></h2>
+    <p class="home-articledateauthor">Published by {{this.author}} on {{formatDate this.date}}</p>
+    <p class="home-articleexcerpt">{{this.excerpt}}</p>
 {{/each}}

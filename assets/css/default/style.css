@@ -1,0 +1,163 @@
+/* Define default (light mode) CSS variables */
+:root {
+    --bg-color: #f4f4f4;
+    --text-color: #333;
+    --main-bg-color: #fff;
+    --nav-bg-color: #333;
+    --nav-text-color: #fff;
+    --nav-text-hover-bg-color: #555;
+    --box-shadow-color: rgba(0, 0, 0, 0.1);
+}
+
+/* When .dark-mode is added to the body, these styles will take precedence */
+body.dark-mode {
+    --bg-color: #222;
+    --text-color: #ddd;
+    --main-bg-color: #333;
+    --nav-bg-color: #555;
+    --nav-text-color: #eee;
+    --nav-text-hover-bg-color: #777;
+    --box-shadow-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Visually hide elements */
+.visually-hidden {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+    white-space: nowrap; /* ensure inline elements don't wrap */
+}
+
+
+/* Reset some browser defaults */
+body, h1, h2, p {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+}
+
+a {
+    color: inherit;
+    transition: color 0.2s;
+}
+
+a:hover {
+    color: var(--nav-text-hover-bg-color);
+}
+
+body {
+    line-height: 1.6;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+}
+
+main {
+    max-width: 1000px;
+    margin: 2rem auto;
+    padding: 1rem;
+    background-color: var(--main-bg-color);
+    box-shadow: 0 0 10px var(--box-shadow-color);
+}
+
+nav {
+    background-color: var(--nav-bg-color);
+    color: var(--nav-text-color);
+    padding: 1rem 1rem;
+    text-align: center;
+}
+
+nav a {
+    color: var(--nav-text-color);
+    text-decoration: none;
+    margin: 0 10px;
+    padding: 10px 10px;
+    border-radius: 3px;
+    transition: background-color 0.2s;
+}
+
+nav a:hover {
+    background-color: var(--nav-text-hover-bg-color);
+}
+
+article h1, article p {
+    margin-bottom: 1rem;
+}
+
+footer {
+    margin-top: 2rem;
+    text-align: center;
+    font-size: 0.8rem;
+}
+
+footer a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Basic button reset */
+#lightSwitch {
+    appearance: none;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    transition: all 0.3s;
+    position: relative;
+    width: 60px;
+    height: 30px;
+    border-radius: 15px;
+    background: var(--nav-bg-color);
+    display: inline-block;
+    text-align: center;
+    line-height: 30px;
+    font-size: 14px;
+    color: var(--nav-text-color);
+    overflow: hidden;
+    margin-left: 10px; /* space between label and button */
+}
+
+/* Toggle Circle */
+#lightSwitch::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 5px;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    background: var(--main-bg-color);
+    border-radius: 50%;
+    transition: all 0.3s;
+}
+
+body.dark-mode #lightSwitch::before {
+    left: calc(100% - 25px); /* Moves to the right */
+}
+
+/* Toggle Labeling */
+#lightSwitch:after {
+    content: "☀️";
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 12px;
+    transition: opacity 0.3s;
+    opacity: 1;
+}
+
+body.dark-mode #lightSwitch:after {
+    content: "🌙";
+    left: 10px;
+    right: auto;
+    opacity: 1;
+}
+
+/* On hover, show a subtle shadow */
+#lightSwitch:hover {
+    box-shadow: 0 0 5px var(--box-shadow-color);
+}
