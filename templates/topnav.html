@@ -1,0 +1,5 @@
+<nav>
+  {{#each items}}
+    <a href="{{this.link}}">{{this.name}}</a> {{#unless @last}}|{{/unless}}
+  {{/each}}
+</nav>

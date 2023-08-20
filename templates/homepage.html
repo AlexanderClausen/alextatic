@@ -1,0 +1,6 @@
+<h1>{{title}}</h1>
+{{#each posts}}
+    <a href="{{this.filename}}"><h2>{{this.title}}</h2></a>
+    <p>{{formatDate this.date}}</p>
+    <p>{{this.excerpt}}</p>
+{{/each}}

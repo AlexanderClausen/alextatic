@@ -1,0 +1,5 @@
+# Ignore all .md files in content directory and its subdirectories
+/content/**/*.md
+
+# Ignore all .html files in public directory and its subdirectories
+/public/**/*.html

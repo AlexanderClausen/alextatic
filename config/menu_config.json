@@ -1,0 +1,13 @@
+{
+    "items": [
+      {
+        "name": "Home",
+        "link": "/index.html"
+      },
+      {
+        "name": "Sample",
+        "link": "/page/sample.html"
+      }
+    ]
+  }
+  
